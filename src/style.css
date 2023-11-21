@@ -1,0 +1,7 @@
+.main{
+  display:flex;
+}
+.main .left{
+  width: 200px;
+  background-color: #ccc;
+}
