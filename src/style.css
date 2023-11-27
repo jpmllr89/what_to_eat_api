@@ -1,7 +1,48 @@
 .main{
   display:flex;
+  justify-content: center;
+  align-items: center;
 }
-.main .left{
-  width: 200px;
-  background-color: #ccc;
+
+.row{
+  display: flex;
+}
+
+.justify-center{
+  justify-content: center;
+}
+
+.align-center{
+  align-items: center;
+}
+i#add{
+  font-size: 50px;
+  color: green;
+  cursor: pointer;
+}
+
+.favorites{
+  flex:1;
+  display:flex;
+  flex-direction: column;
+}
+
+div#container{
+  flex:1;
+  width: 50%;
+}
+
+/* Recipe Card */
+.recipe{
+  width: 100%;
+  display: flex;
+  flex:1;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.recipe img{
+  width: 500px;
+  border: 1px solid black;
+  border-radius: 10px;
 }

@@ -3,7 +3,10 @@
 const input = document.getElementById('foodName').textContent;
 const foodItem = document.getElementById('foodItem');
 const container = document.getElementById('container');
-console.log(container);
+const recipes = Array.from(document.getElementsByClassName('recipe'));
+const addFavoriteIcon = document.getElementById('add');
+
+console.log(recipes);
 
 // const htmlGenerators = {
 //   card:{
@@ -12,7 +15,9 @@ console.log(container);
 //     instructions: (data) => data.map(instruction => `<p>${instruction}</p>`).join('')
 //   }
 // };
-
+const addFavorite = () => {
+  addFavoriteIcon.style.color = 'red';
+};
 const getIngredients = (data) => {
   const ingredients = [];
   const iterateData = data.meals[0];
@@ -56,7 +61,7 @@ const generateCard = async (url) => {
 
   const finalHtml = `
   <div class='recipe'>
-    <h1>${mealHtml}</h1> 
+    <div class="row justify-content"><h2>${mealHtml}</h2><i id="add" onClick="addFavorite()">&hearts; Add</i></div>
     <img src="${thumbHtml}" alt="Meal Thumbnail">
     <h2>Ingredients</h2>
     <div>${ingredientsHtml}</div>
@@ -81,6 +86,10 @@ foodItem.addEventListener('click', async () => {
     const html = await generateCard(`https://www.themealdb.com/api/json/v1/1/random.php`);
     container.innerHTML += html;
   }
+});
+
+addFavorite.addEventListener('click', () => {
+  addFavorite.style.color = 'red';
 });
 
 // console.log(url);
