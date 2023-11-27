@@ -1,11 +1,5 @@
 .main{
   display:flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.row{
-  display: flex;
 }
 
 .justify-center{
@@ -28,13 +22,13 @@ i#add{
 }
 
 div#container{
-  flex:1;
-  width: 50%;
+  flex:1 1 50%;
+  overflow: auto;
 }
 
 /* Recipe Card */
 .recipe{
-  width: 100%;
+  max-width: 100%;
   display: flex;
   flex:1;
   flex-direction: column;
@@ -45,4 +39,9 @@ div#container{
   width: 500px;
   border: 1px solid black;
   border-radius: 10px;
+}
+
+.recipe p{
+  max-width: 50%;
+  overflow-wrap: break-word;
 }
