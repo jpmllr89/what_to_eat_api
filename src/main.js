@@ -4,7 +4,7 @@
 const foodItem = document.getElementById('foodItem');
 const container = document.getElementById('container');
 const recipes = Array.from(document.getElementsByClassName('recipe'));
-const addFavoriteIcon = document.getElementById('add');
+const switchButton = document.querySelectorAll('div.recipes i');
 let idCounter = 0;
 const favoriteList = document.getElementById('favorites');
 
@@ -78,7 +78,7 @@ foodItem.addEventListener('click', async () => {
     const html = await generateRecipe(`https://www.themealdb.com/api/json/v1/1/random.php`, i);
     container.innerHTML += html;
   }
-  const recipes = Array.from(document.getElementsByClassName('recipe'));
+  const recipes = Array.from(document.querySelectorAll(switchButton));
   recipes.forEach((item)=>{
     item.addEventListener('click', function(e){
       const recipe = e.target.parentNode.parentNode.id;
