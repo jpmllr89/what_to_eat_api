@@ -3,11 +3,10 @@
 // const input = document.getElementById('foodName').textContent;
 const foodItem = document.getElementById('foodItem');
 const container = document.getElementById('container');
-const recipes = Array.from(document.getElementsByClassName('recipe'));
 const addFavoriteIcon = document.getElementById('add');
 const addButtonSelector ='div.recipes i';
 
-console.log(recipes);
+// console.log(recipes);
 
 
 const addFavorite = () => {
@@ -38,7 +37,7 @@ const getMeasurements = (data) => {
   return measurements;
 }
 
-const generateCard = async (url) => {
+const generateCard = async (url, i) => {
   const response = await fetch(url);
   const data = await response.json();
   console.log(data.meals[0]['strIngredient1']);
@@ -55,8 +54,8 @@ const generateCard = async (url) => {
   }).join('');
 
   const finalHtml = `
-  <div class='recipe'>
-    <div class="row justify-content"><h2>${mealHtml}</h2><i id="add" onClick="addFavorite()">&hearts; Add</i></div>
+  <div class='recipe' id=${i}>
+    <div class="row justify-content"><h2>${mealHtml}</h2><i class="fa fa-heart">&hearts; Add</i></div>
     <img src="${thumbHtml}" alt="Meal Thumbnail">
     <h2>Ingredients</h2>
     <div>${ingredientsHtml}</div>
@@ -76,23 +75,56 @@ generateCard(`https://www.themealdb.com/api/json/v1/1/random.php`);
 
 
 // console.log(input);
-foodItem.addEventListener('click', async () => {
-  for (let i = 0; i < 10; i++) {
-    const html = await generateCard(`https://www.themealdb.com/api/json/v1/1/random.php`);
-    container.innerHTML += html;
-  }
-});
-
-addFavorite.addEventListener('click', () => {
-  addFavorite.style.color = 'red';
-});
+// addFavorite.addEventListener('click', () => {
+//   addFavorite.style.color = 'red';
+// });
 
 // right here is the switching functionality
-Array.from(allItems).forEach((item)=>{
-  item.addEventListener('click', function(e){
-    const target = e.target.parentNode.id;
-    console.log(target);
-    target == 'main' ? updateCollections(item.id, 'toFavs') : updateCollections(item.id, 'toMain')
-})});
+const moveCard = (id, direction) =>{
+
+  const selection = document.getElementById(id);
+  console.log(selection);
+
+  if(selection){
+    selection
+      .querySelector('i')
+      .classList.toggle('fa-heart-broken', direction ==="toFavs");
+    
+    selection
+      .querySelector('i')
+      .classList.toggle('fa-heart-circle-plus', direction === 'toMain');
+    
+    const targetParent = 
+      direction === 'toMain' 
+        ? document.getElementById('container') 
+        : document.getElementById('favorites');
+    
+    targetParent.appendChild(selection);
+
+  }
+}
+
+// recipes.forEach((item)=>{
+//   item.addEventListener('click', function(e){
+//     const target = e.target.parentNode.id;
+//     console.log(target);
+//     target == 'container' ? moveCard(item.id, 'toFavs') : moveCard(item.id, 'toMain')
+// })});
+
+
+foodItem.addEventListener('click', async () => {
+  for (let i = 0; i < 10; i++) {
+    const html = await generateCard(`https://www.themealdb.com/api/json/v1/1/random.php`, i);
+    container.innerHTML += html;
+  }
+  const recipes = Array.from(document.getElementsByClassName('recipe'));
+  recipes.forEach((item)=>{
+    item.addEventListener('click', function(e){
+      const recipe = e.target.closest('.recipe');
+      const target = recipe.parentNode.parentNode.id;
+      console.log(target);
+      target == 'container' ? moveCard(recipe.id, 'toFavs') : moveCard(recipe.id, 'toMain')
+  })});
+});
 
 // console.log(url);
