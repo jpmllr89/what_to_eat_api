@@ -5,6 +5,7 @@ const foodItem = document.getElementById('foodItem');
 const container = document.getElementById('container');
 const addFavoriteIcon = document.getElementById('add');
 const addButtonSelector ='div.recipes i';
+let idCounter = 0;
 
 // console.log(recipes);
 
@@ -37,7 +38,7 @@ const getMeasurements = (data) => {
   return measurements;
 }
 
-const generateCard = async (url, i) => {
+const generateCard = async (url) => {
   const response = await fetch(url);
   const data = await response.json();
   console.log(data.meals[0]['strIngredient1']);
@@ -54,7 +55,7 @@ const generateCard = async (url, i) => {
   }).join('');
 
   const finalHtml = `
-  <div class='recipe' id=${i}>
+  <div class='recipe' id=${idCounter}>
     <div class="row justify-content"><h2>${mealHtml}</h2><i class="fa fa-heart">&hearts; Add</i></div>
     <img src="${thumbHtml}" alt="Meal Thumbnail">
     <h2>Ingredients</h2>
@@ -63,6 +64,8 @@ const generateCard = async (url, i) => {
     <div>${instructionsHtml}</div>
   </div>
   `;
+  
+  idCounter++;
   
   console.log(finalHtml);
   return finalHtml;
@@ -118,11 +121,14 @@ foodItem.addEventListener('click', async () => {
     container.innerHTML += html;
   }
   const recipes = Array.from(document.getElementsByClassName('recipe'));
+  // const addButton = document.querySelectorAll(addButtonSelector)
+  // console.log(addButton)
   recipes.forEach((item)=>{
     item.addEventListener('click', function(e){
-      const recipe = e.target.closest('.recipe');
-      const target = recipe.parentNode.parentNode.id;
-      console.log(target);
+      const recipe = e.target.closest('div.recipe');
+      const target = recipe.parentNode.id;
+      console.log(recipe, "recipe");
+      console.log(target, "target");
       target == 'container' ? moveCard(recipe.id, 'toFavs') : moveCard(recipe.id, 'toMain')
   })});
 });
