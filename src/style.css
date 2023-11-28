@@ -15,14 +15,13 @@ i#add{
   cursor: pointer;
 }
 
-.favorites{
+div#favorites{
   flex:1;
-  display:flex;
-  flex-direction: column;
+  display:block;
 }
 
 div#container{
-  flex:1 1 50%;
+  flex:1;
   overflow: auto;
 }
 
