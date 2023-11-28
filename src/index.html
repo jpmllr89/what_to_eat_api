@@ -5,17 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/daab95b70a.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="input_field">
-    <input type="text" id="foodName" placeholder="Enter your name">
-    <button id="foodItem">Submit</button>
+    <!-- <input type="text" id="foodName" placeholder="Enter your name"> -->
+    <button id="foodItem">Press this button to generate Recipes</button>
   </div>
   <div class="main">
-    <div id="container"></div>
-    <div id="favorites">
-      <h2>Favorites</h2>
-      <ul id="favoritesList"></ul>
+    <div class="foodContainer">
+      <h2>Recipes</h2>
+      <div id="container">
+      </div>
+    </div>
+    <div class="favContainer">
+      <h2>Favorite Recipes</h2>
+      <div id="favorites">
+      </div>
     </div>
   </div>
   <script src="main.js"></script>
