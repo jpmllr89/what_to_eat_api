@@ -1,6 +1,6 @@
 
 // declare global variables
-const input = document.getElementById('foodName').textContent;
+// const input = document.getElementById('foodName').textContent;
 const foodItem = document.getElementById('foodItem');
 const container = document.getElementById('container');
 const recipes = Array.from(document.getElementsByClassName('recipe'));
@@ -52,7 +52,7 @@ const generateRecipe = async (url, i) => {
 
   const finalHtml = `
   <div class='recipe' id="${idCounter}">
-    <div class="row justify-content"><h2>${mealHtml}</h2><i class="fa-solid fa-heart"></i></div>
+    <div class="row justify-content"><h2>${mealHtml}</h2><i id="add" class="fa-solid fa-heart"></i></div>
     <img src="${thumbHtml}" alt="Meal Thumbnail">
     <h2>Ingredients</h2>
     <div>${ingredientsHtml}</div>
