@@ -4,6 +4,8 @@
 const foodItem = document.getElementById('foodItem');
 const container = document.getElementById('container');
 const addFavoriteIcon = document.getElementById('add');
+const sortBtn = document.getElementsByClassName('sortBtn');
+const sortBtnfavs = document.getElementsByClassName('sortBtnfavs');
 let idCounter = 0;
 
 // console.log(recipes);
@@ -127,4 +129,41 @@ foodItem.addEventListener('click', async () => {
   })});
 });
 
-// console.log(url);
+// sort function will be here.  You need two.  One for the container and the other for the favs section.
+const sortDataContainer = (direction) =>{
+  const mainNode = document.getElementById("container");
+  console.log(mainNode)
+  const allItems = document.querySelectorAll("#container .recipe");
+  const itemsArray = Array.from(allItems);
+  console.log(itemsArray);
+  direction === "desc"
+  ? itemsArray.sort((a, b) => b.querySelector('h2').textContent.localeCompare(a.querySelector('h2').textContent)).forEach(item => mainNode.append(item))
+  : itemsArray.sort((a, b) => a.querySelector('h2').textContent.localeCompare(b.querySelector('h2').textContent)).forEach(item => mainNode.append(item))
+}
+
+const sortDataFavs = (direction) =>{
+  const mainNode = document.getElementById("favorites");
+  console.log(mainNode)
+  const allItems = document.querySelectorAll("#favorites .recipe");
+  const itemsArray = Array.from(allItems);
+  console.log(itemsArray);
+  direction === "desc"
+  ? itemsArray.sort((a, b) => b.querySelector('h2').textContent.localeCompare(a.querySelector('h2').textContent)).forEach(item => mainNode.append(item))
+  : itemsArray.sort((a, b) => a.querySelector('h2').textContent.localeCompare(b.querySelector('h2').textContent)).forEach(item => mainNode.append(item))
+}
+
+// This applies the sorting function 
+Array.from(sortBtn).forEach((button) => {
+  button.addEventListener('click', function(e){
+    if(e.target.parentNode.parentNode.classList.contains('favContainer')){
+      console.log("BING")
+      console.log(e.target.dataset.sortdir)
+      sortDataFavs(e.target.dataset.sortdir);
+    }else if(e.target.parentNode.parentNode.classList.contains('foodContainer')){
+      console.log("BANG");
+      console.log(e.target.dataset.sortdir)
+      sortDataContainer(e.target.dataset.sortdir);
+    }
+  });
+})
+
