@@ -30,6 +30,12 @@ div.foodContainer, div.favContainer{
   overflow: auto;
 }
 
+.recipe i{
+  font-size: 30px;
+  color: red;
+  cursor: pointer;
+}
+
 .recipe img{
   width: 500px;
   border: 1px solid black;
@@ -39,4 +45,11 @@ div.foodContainer, div.favContainer{
 .recipe p{
   max-width: 50%;
   overflow-wrap: break-word;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  align-items: center;
 }

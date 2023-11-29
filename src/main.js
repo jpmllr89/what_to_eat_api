@@ -4,7 +4,6 @@
 const foodItem = document.getElementById('foodItem');
 const container = document.getElementById('container');
 const addFavoriteIcon = document.getElementById('add');
-const addButtonSelector ='div.recipes i';
 let idCounter = 0;
 
 // console.log(recipes);
@@ -56,7 +55,7 @@ const generateCard = async (url) => {
 
   const finalHtml = `
   <div class='recipe' id=${idCounter}>
-    <div class="row justify-content"><h2>${mealHtml}</h2><i class="fa fa-heart">&hearts; Add</i></div>
+    <div class="row justify-content"><h2>${mealHtml}</h2><i class="fa fa-heart"></i></div>
     <img src="${thumbHtml}" alt="Meal Thumbnail">
     <h2>Ingredients</h2>
     <div>${ingredientsHtml}</div>
@@ -95,7 +94,7 @@ const moveCard = (id, direction) =>{
     
     selection
       .querySelector('i')
-      .classList.toggle('fa-heart-circle-plus', direction === 'toMain');
+      .classList.toggle('fa-heart', direction === 'toMain');
     
     const targetParent = 
       direction === 'toMain' 
@@ -107,12 +106,6 @@ const moveCard = (id, direction) =>{
   }
 }
 
-// recipes.forEach((item)=>{
-//   item.addEventListener('click', function(e){
-//     const target = e.target.parentNode.id;
-//     console.log(target);
-//     target == 'container' ? moveCard(item.id, 'toFavs') : moveCard(item.id, 'toMain')
-// })});
 
 
 foodItem.addEventListener('click', async () => {
@@ -121,9 +114,10 @@ foodItem.addEventListener('click', async () => {
     container.innerHTML += html;
   }
   const recipes = Array.from(document.getElementsByClassName('recipe'));
+  const addButtonSelector = document.querySelectorAll('div.recipe i');
   // const addButton = document.querySelectorAll(addButtonSelector)
   // console.log(addButton)
-  recipes.forEach((item)=>{
+  addButtonSelector.forEach((item)=>{
     item.addEventListener('click', function(e){
       const recipe = e.target.closest('div.recipe');
       const target = recipe.parentNode.id;
