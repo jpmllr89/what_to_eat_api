@@ -127,4 +127,10 @@ foodItem.addEventListener('click', async () => {
   })});
 });
 
-// console.log(url);
+// sort function will be here
+const sortData = (direction) =>{
+  const mainNode = document.getElementById("main");
+  const itemsArray = Array.from(allItems);
+  direction === "desc" ? itemsArray.sort((a,b) => b.id-a.id).forEach((item => {mainNode.append(item)})) :
+   itemsArray.sort((a,b) => a.id -b.id).forEach((item)=>{mainNode.append(item)});
+}
