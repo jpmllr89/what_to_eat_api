@@ -178,7 +178,6 @@ foodItem.addEventListener('click', async () => {
       document.querySelector('.modal.show').classList.remove(isVisible);
     }
   });
-
   const recipes = Array.from(document.getElementsByClassName('recipe'));
   const addButtonSelector = document.querySelectorAll('div.recipe i');
   // const addButton = document.querySelectorAll(addButtonSelector)
