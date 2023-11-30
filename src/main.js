@@ -59,17 +59,24 @@ const generateCard = async (url) => {
   <div class='recipe' id=${idCounter}>
     <div class="row justify-content"><h2>${mealHtml}</h2><i class="fa fa-heart"></i></div>
     <img src="${thumbHtml}" alt="Meal Thumbnail">
+  </div>
+  `;
+
+  const modalHTML = `
+  <div class='recipe' id=${idCounter}>
+    <div class="row justify-content"><h2>${mealHtml}</h2><i class="fa fa-heart"></i></div>
+    <img src="${thumbHtml}" alt="Meal Thumbnail">
     <h2>Ingredients</h2>
-    <div>${ingredientsHtml}</div>
+    <div class="ingredientsContainer">${ingredientsHtml}</div>
     <h2>Instructions</h2>
-    <div>${instructionsHtml}</div>
+    <div class="instructionsContainer">${instructionsHtml}</div>
   </div>
   `;
   
   idCounter++;
   
   console.log(finalHtml);
-  return finalHtml;
+  return [finalHtml, modalHTML];
 
   // You can then append `finalHtml` to your DOM or use it as needed.
 };
@@ -113,7 +120,7 @@ const moveCard = (id, direction) =>{
 foodItem.addEventListener('click', async () => {
   for (let i = 0; i < 10; i++) {
     const html = await generateCard(`https://www.themealdb.com/api/json/v1/1/random.php`, i);
-    container.innerHTML += html;
+    container.innerHTML += html[0];
   }
   const recipes = Array.from(document.getElementsByClassName('recipe'));
   const addButtonSelector = document.querySelectorAll('div.recipe i');

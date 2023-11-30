@@ -23,17 +23,14 @@ div.foodContainer, div.favContainer{
 
 /* Recipe Card */
 .recipe{
-  max-width: 100%;
+  width: fit-content;
   display: flex;
   flex:1;
   flex-direction: column;
   overflow: auto;
 }
-
-.recipe i{
-  font-size: 30px;
-  color: red;
-  cursor: pointer;
+.recipe h2{
+  width: fit-content;
 }
 
 .recipe img{
@@ -42,14 +39,24 @@ div.foodContainer, div.favContainer{
   border-radius: 10px;
 }
 
-.recipe p{
+.recipe .instructionsContainer p{
   max-width: 50%;
   overflow-wrap: break-word;
 }
 
-.row{
+.recipe .ingredientsContainer p, .ingredientsContainer{
+  width: fit-content
+}
+
+.recipe .row{
   display: flex;
   flex-direction: row;
-  gap: 30px;
   align-items: center;
+  gap: 20px;
+}
+
+.recipe .row i{
+  font-size: 30px;
+  cursor: pointer;
+  color: red;
 }
