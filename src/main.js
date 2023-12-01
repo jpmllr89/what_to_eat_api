@@ -15,7 +15,13 @@ let idCounter = 0;
 const htmlTemplates = {
   recipe: (htmlData) => {
     return `<div class='recipe' id=${idCounter}>
-              <div class="row justify-content"><h2>${htmlData.meal}</h2><i class="fa fa-heart"></i></div>
+              <div class="row justify-between align-center">
+                <div class="title">
+                  <h2>${htmlData.meal}</h2>
+                  <div class="row location"><i class="fa fa-globe"></i><span>${htmlData.area}</span></div>
+                </div>
+                <i class="fa fa-heart" id="add"></i>
+              </div>
               <img data-open="modal${idCounter}" src="${htmlData.thumb}" alt="Meal Thumbnail">
             </div>`
   },
@@ -74,6 +80,7 @@ const generateCard = async (url, templates) => {
   const htmlData = {
     meal: data.meals[0].strMeal,
     thumb: data.meals[0].strMealThumb,
+    area: data.meals[0].strArea,
     instructions: data.meals[0].strInstructions.replace(/'[0-9].' || 'STEP [0-9]'/g, '').split('\n').map(instruction => `<p>${instruction}</p>`).join(''),
     ingredients: getIngredients(data),
     measurements: getMeasurements(data),
@@ -99,11 +106,11 @@ const moveCard = (id, direction) =>{
 
   if(selection){
     selection
-      .querySelector('i')
+      .querySelector('#add')
       .classList.toggle('fa-heart-broken', direction ==="toFavs");
     
     selection
-      .querySelector('i')
+      .querySelector('#add')
       .classList.toggle('fa-heart', direction === 'toMain');
     
     const targetParent = 
@@ -169,7 +176,7 @@ foodItem.addEventListener('click', async () => {
     }
   });
   const recipes = Array.from(document.getElementsByClassName('recipe'));
-  const addButtonSelector = document.querySelectorAll('div.recipe i');
+  const addButtonSelector = document.querySelectorAll('#add');
   // const addButton = document.querySelectorAll(addButtonSelector)
   // console.log(addButton)
   addButtonSelector.forEach((item)=>{

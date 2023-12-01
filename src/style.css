@@ -2,16 +2,21 @@
   display:flex;
 }
 
-.justify-center{
-  justify-content: center;
+h2{
+  margin-bottom: 5px;
+}
+
+.justify-between{
+  justify-content: space-between;
 }
 
 .align-center{
   align-items: center;
 }
+
 i#add{
-  font-size: 50px;
-  color: green;
+  font-size: 30px;
+  color: red;
   cursor: pointer;
 }
 
@@ -19,6 +24,11 @@ div.foodContainer, div.favContainer{
   flex:1;
   display:block;
   width: fit-content;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
 }
 
 /* Recipe Card */
@@ -53,17 +63,17 @@ div.foodContainer, div.favContainer{
   width: fit-content
 }
 
-.recipe .row{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 20px;
-}
 
-.recipe .row > i{
+.recipe.row > i{
   font-size: 30px;
   cursor: pointer;
   color: red;
+}
+
+.location{
+  font-size: 14px;
+  color: gray;
+  gap: 10px;
 }
 
 /* Modal Styling */
