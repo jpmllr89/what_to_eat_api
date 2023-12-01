@@ -9,7 +9,13 @@ h2{
 .justify-between{
   justify-content: space-between;
 }
+.justify-center{
+  justify-content: center;
+}
 
+.gap-20{
+  gap: 20px;
+}
 .align-center{
   align-items: center;
 }

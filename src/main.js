@@ -9,7 +9,18 @@ const sortBtn = document.getElementsByClassName('sortBtn');
 const sortBtnfavs = document.getElementsByClassName('sortBtnfavs');
 const main = document.getElementById('main');
 let idCounter = 0;
-
+const recipeCounts = {
+  Italian: 0,
+  Indian: 0,
+  Chinese: 0,
+  Mexican: 0,
+  French: 0,
+  American: 0,
+  Japanese: 0,
+  British: 0,
+  Russian: 0,
+  Polish: 0,
+}
 // console.log(recipes);
 
 const htmlTemplates = {
@@ -44,6 +55,24 @@ const htmlTemplates = {
                 </div>
               </div>
             </div>`
+  },
+  updateRecipeCounts: (recipeCounts) => {
+    const countElement = document.getElementById('recipeCounts');
+    countElement.innerHTML = `
+    <div class="gap-20 justify-center row align-center">
+      <div><span class="fi fi-it"></span>:${recipeCounts.Italian}</div>
+      <div><span class="fi fi-in"></span>:${recipeCounts.Indian}</div>
+      <div><span class="fi fi-cn"></span>:${recipeCounts.Chinese}</div>
+      <div><span class="fi fi-mx"></span>:${recipeCounts.Mexican}</div>
+      <div><span class="fi fi-fr"></span>:${recipeCounts.French}</div>
+      <div><span class="fi fi-us"></span>:${recipeCounts.American}</div>
+      <div><span class="fi fi-gb"></span>:${recipeCounts.British}</div>
+      <div><span class="fi fi-jp"></span>:${recipeCounts.Japanese}</div>
+      <div><span class="fi fi-ru"></span>:${recipeCounts.Russian}</div>
+      <div><span class="fi fi-pl"></span>:${recipeCounts.Polish}</div>
+    </div>
+    `;
+  
   }
 }
 
@@ -84,6 +113,10 @@ const generateCard = async (url, templates) => {
     instructions: data.meals[0].strInstructions.replace(/'[0-9].' || 'STEP [0-9]'/g, '').split('\n').map(instruction => `<p>${instruction}</p>`).join(''),
     ingredients: getIngredients(data),
     measurements: getMeasurements(data),
+  }
+
+  if (recipeCounts.hasOwnProperty(htmlData.area)) {
+    recipeCounts[htmlData.area]++;
   }
 
   const ingredientsHtml = htmlData.ingredients.map((ingredient, i) => {
@@ -130,6 +163,8 @@ foodItem.addEventListener('click', async () => {
     const html = await generateCard(`https://www.themealdb.com/api/json/v1/1/random.php`, htmlTemplates);
     console.log(html[0]);
     console.log(html[1]);
+
+    htmlTemplates.updateRecipeCounts(recipeCounts);
     
     const recipeCard = document.createElement('template');
     recipeCard.innerHTML = html[0].trim();
