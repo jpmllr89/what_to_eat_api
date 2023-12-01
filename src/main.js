@@ -1,6 +1,7 @@
 
 // declare global variables
 // const input = document.getElementById('foodName').textContent;
+
 const foodItem = document.getElementById('foodItem');
 const container = document.getElementById('container');
 const addFavoriteIcon = document.getElementById('add');
@@ -11,10 +12,35 @@ let idCounter = 0;
 
 // console.log(recipes);
 
+const htmlTemplates = {
+  recipe: (htmlData) => {
+    return `<div class='recipe' id=${idCounter}>
+              <div class="row justify-content"><h2>${htmlData.meal}</h2><i class="fa fa-heart"></i></div>
+              <img data-open="modal${idCounter}" src="${htmlData.thumb}" alt="Meal Thumbnail">
+            </div>`
+  },
+  modal: (htmlData, htmlIngredients) => {
+    return `<div class='recipe modal' id="modal${idCounter}">
+              <div class="modal-display">
+                <div class="modal-header"><h2>${htmlData.meal}</h2><i data-close class="fa fa-x"></i></div>
+                <div class="modal-body">
+                  <img src="${htmlData.thumb}" alt="Meal Thumbnail">
+                  <div class="directionsBlock">
+                    <div class="ingredientsBlock">
+                      <h2>Ingredients</h2>
+                      <div class="ingredientsContainer">${htmlIngredients}</div>
+                    </div>
+                    <div class="instructionsBlock">
+                      <h2>Instructions</h2>
+                      <div class="instructionsContainer">${htmlData.instructions}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>`
+  }
+}
 
-const addFavorite = () => {
-  addFavoriteIcon.style.color = 'red';
-};
 const getIngredients = (data) => {
   const ingredients = [];
   const iterateData = data.meals[0];
@@ -40,7 +66,7 @@ const getMeasurements = (data) => {
   return measurements;
 }
 
-const generateCard = async (url) => {
+const generateCard = async (url, templates) => {
   const response = await fetch(url);
   const data = await response.json();
   console.log(data.meals[0]['strIngredient1']);
@@ -58,56 +84,18 @@ const generateCard = async (url) => {
     return `<p>${measurement} ${ingredient}</p>`;
   }).join('');
 
-  const finalHtml = `
-  <div class='recipe' id=${idCounter}>
-    <div class="row justify-content"><h2>${htmlData.meal}</h2><i class="fa fa-heart"></i></div>
-    <img data-open="modal${idCounter}" src="${htmlData.thumb}" alt="Meal Thumbnail">
-  </div>
-  `;
-
-  const modalHTML = `
-  <div class='recipe modal' id="modal${idCounter}">
-  <div class="modal-display">
-  <div class="modal-header"><h2>${htmlData.meal}</h2><i data-close class="fa fa-x"></i></div>
-      <div class="modal-body">
-        <img src="${htmlData.thumb}" alt="Meal Thumbnail">
-        <div class="directionsBlock">
-          <div class="ingredientsBlock">
-            <h2>Ingredients</h2>
-            <div class="ingredientsContainer">${ingredientsHtml}</div>
-          </div>
-          <div class="instructionsBlock">
-            <h2>Instructions</h2>
-            <div class="instructionsContainer">${htmlData.instructions}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  `;
+  const finalHtml = templates.recipe(htmlData);
+  const modalHtml = templates.modal(htmlData, ingredientsHtml);
   
   idCounter++;
   
-  console.log(finalHtml);
-  return [finalHtml, modalHTML];
-
-  // You can then append `finalHtml` to your DOM or use it as needed.
+  return [finalHtml, modalHtml];
 };
-
-generateCard(`https://www.themealdb.com/api/json/v1/1/random.php`);
-
-
-
-// console.log(input);
-// addFavorite.addEventListener('click', () => {
-//   addFavorite.style.color = 'red';
-// });
 
 // right here is the switching functionality
 const moveCard = (id, direction) =>{
 
   const selection = document.getElementById(id);
-  console.log(selection);
 
   if(selection){
     selection
@@ -132,16 +120,18 @@ const moveCard = (id, direction) =>{
 
 foodItem.addEventListener('click', async () => {
   for (let i = 0; i < 10; i++) {
-    const html = await generateCard(`https://www.themealdb.com/api/json/v1/1/random.php`, i);
+    const html = await generateCard(`https://www.themealdb.com/api/json/v1/1/random.php`, htmlTemplates);
+    console.log(html[0]);
+    console.log(html[1]);
     
-    const template = document.createElement('template');
-    template.innerHTML = html[0].trim();
-    container.appendChild(template.content.firstChild);
+    const recipeCard = document.createElement('template');
+    recipeCard.innerHTML = html[0].trim();
+    container.append(recipeCard.content.firstChild);
 
-    template.innerHTML = html[1].trim();
-    main.appendChild(template.content.firstChild);
-
-  }
+    const modalCard = document.createElement('template');
+    modalCard.innerHTML = html[1].trim();
+    main.append(modalCard.content.firstChild);
+}
   // Modal functionality
   const modalOpen = "[data-open]";
   const modalClose = "[data-close]";
