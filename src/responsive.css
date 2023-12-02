@@ -1,0 +1,47 @@
+@media only screen and (max-width: 800px) {
+  .recipe img{
+    width: 300px;
+  }
+  .recipe h2{
+    font-size: 20px;
+    word-wrap: break-word;
+    max-width: 80%;
+  }
+  .recipe.row{
+    max-width: 300px;
+  }
+  div.title{
+    max-width: 275px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .recipe img{
+    width: 150px;
+  }
+  .recipe h2{
+    font-size: 20px;
+    word-wrap: break-word;
+    max-width: 80%;
+  }
+  .recipe.row{
+    max-width: 150px;
+  }
+  div.title{
+    max-width: 125px;
+  }
+  #main{
+    display:flex;
+    justify-content:space-between;
+  }
+  div.counts{
+    display:flex;
+    flex-wrap:wrap;
+  }
+  .input_field{
+    display:flex;
+    justify-content:center;
+    margin: 25px 0;
+  }
+
+}
