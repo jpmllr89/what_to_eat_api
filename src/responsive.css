@@ -5,7 +5,7 @@
   .recipe h2{
     font-size: 20px;
     word-wrap: break-word;
-    max-width: 80%;
+    width: 100%;
   }
   .recipe.row{
     max-width: 300px;
@@ -22,7 +22,7 @@
   .recipe h2{
     font-size: 20px;
     word-wrap: break-word;
-    max-width: 80%;
+    width: 100%;
   }
   .recipe.row{
     max-width: 150px;
@@ -37,11 +37,6 @@
   div.counts{
     display:flex;
     flex-wrap:wrap;
-  }
-  .input_field{
-    display:flex;
-    justify-content:center;
-    margin: 25px 0;
   }
 
 }

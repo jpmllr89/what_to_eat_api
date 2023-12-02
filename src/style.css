@@ -4,7 +4,9 @@
 
 h2{
   margin-bottom: 5px;
+  word-wrap: break-word;
 }
+
 
 .justify-between{
   justify-content: space-between;
@@ -37,6 +39,11 @@ div.foodContainer, div.favContainer{
   flex-direction: row;
 }
 
+.input_field{
+  display:flex;
+  justify-content:center;
+  margin: 25px 0;
+}
 /* Recipe Card */
 .recipe{
   width: fit-content;
@@ -76,11 +83,15 @@ div.foodContainer, div.favContainer{
   color: red;
 }
 
+.recipe .title{
+  max-width: 375px
+}
 .location{
   font-size: 14px;
   color: gray;
   gap: 10px;
 }
+
 
 /* Modal Styling */
 
