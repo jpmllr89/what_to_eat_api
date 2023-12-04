@@ -1,5 +1,7 @@
 #main{
   display:flex;
+  gap: 50px;
+  justify-content: center;
 }
 
 h2{
@@ -29,7 +31,7 @@ i#add{
 }
 
 div.foodContainer, div.favContainer{
-  flex:1;
+  /* flex:1; */
   display:block;
   width: fit-content;
 }
